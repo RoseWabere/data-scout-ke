@@ -1,0 +1,131 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* LIGHT MODE (default) – warm, accessible */
+  :root {
+    --bg-page: #F8F7F4;
+    --bg-surface: #FFFFFF;
+    --text-primary: #1A1C20;
+    --text-secondary: #5A5E6A;
+    --border-subtle: #E4E2DF;
+    --accent: #4A6B8A;
+    --accent-hover: #3A5A78;
+  }
+
+  body {
+    background-color: var(--bg-page);
+    color: var(--text-primary);
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Syne', system-ui, sans-serif;
+    color: var(--text-primary);
+  }
+
+  /* DARK MODE */
+  .dark {
+    --bg-page: #0A0C10;
+    --bg-surface: #13161C;
+    --text-primary: #EDEDED;
+    --text-secondary: #9CA3AF;
+    --border-subtle: #2A2E38;
+    --accent: #6B9EC2;
+    --accent-hover: #5A8EB2;
+  }
+
+  .dark body {
+    background-color: var(--bg-page);
+    color: var(--text-primary);
+  }
+
+  .dark h1,
+  .dark h2,
+  .dark h3,
+  .dark h4,
+  .dark h5,
+  .dark h6 {
+    color: var(--text-primary);
+  }
+
+  
+  .text-secondary {
+    color: var(--text-secondary);
+  }
+  .border-subtle {
+    border-color: var(--border-subtle);
+  }
+  .bg-surface {
+    background-color: var(--bg-surface);
+  }
+}
+
+@layer components {
+  /* NAVBAR – always dark background, light text (no transparency issues) */
+  .nav-premium {
+    @apply bg-brand-navy-dark border-b border-white/10;
+  }
+  .dark .nav-premium {
+    @apply bg-brand-navy-dark/95 backdrop-blur-sm;
+  }
+
+  /* CARDS – clean, subtle shadow, no aggressive hover lift */
+  .card-premium {
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: 1rem;
+    transition: all 0.2s ease;
+  }
+  .card-premium:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+  }
+  .dark .card-premium:hover {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  }
+
+  /* BUTTONS */
+  .btn-primary {
+    background-color: var(--accent);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    transition: all 0.2s;
+  }
+  .btn-primary:hover {
+    background-color: var(--accent-hover);
+    transform: translateY(-1px);
+  }
+  .btn-outline {
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    background: transparent;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    transition: all 0.2s;
+  }
+  .btn-outline:hover {
+    background-color: var(--accent);
+    color: white;
+  }
+}
+
+
+
+@layer utilities {
+  /* Subtle grid pattern – no aggressive opacity */
+  .grid-pattern {
+    background-image: 
+      linear-gradient(var(--border-subtle) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border-subtle) 1px, transparent 1px);
+    background-size: 60px 60px;
+    opacity: 0.3;
+  }
+  .dark .grid-pattern {
+    opacity: 0.15;
+  }
+}
