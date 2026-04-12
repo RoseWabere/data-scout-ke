@@ -3,6 +3,7 @@ import { DM_Sans, Syne } from 'next/font/google'
 import './globals.css'
 import Navigation from '@/components/Navigation'
 import Footer from '@/components/Footer'
+import FloatingWhatsApp from '@/components/FloatingWhatsapp'
 
 const dmSans = DM_Sans({ 
   subsets: ['latin'],
@@ -41,6 +42,7 @@ export default function RootLayout({
       <body className="font-sans antialiased">
         <Navigation />
         <main>{children}</main>
+        <FloatingWhatsApp />
         <Footer />
       </body>
     </html>

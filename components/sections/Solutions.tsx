@@ -44,7 +44,7 @@ const solutions = [
 
 export default function Solutions() {
   return (
-    <section id="solutions" className="py-24 bg-surface">
+    <section id="solutions" className="py-20 bg-surface">
       <div className="container mx-auto px-6">
         
         {/* Header */}

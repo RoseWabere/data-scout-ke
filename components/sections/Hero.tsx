@@ -10,7 +10,7 @@ export default function Hero() {
       {/* <div className="absolute inset-0 grid-pattern pointer-events-none"></div> */}
       {/* <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-brand-accent/5 rounded-full blur-3xl"></div> */}
 
-      <div className="container mx-auto px-6 relative z-10 pt-24">
+      <div className="container mx-auto px-6 relative z-10 pt-24 pb-12">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
