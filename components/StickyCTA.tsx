@@ -1,4 +1,8 @@
 // components/StickyCTA.tsx
+// A sticky call-to-action that appears after the user scrolls past 50% of the page. 
+// Uses Framer Motion for smooth entrance and exit animations, and encourages users to book a free consultation. 
+// Disappears when the user scrolls back up or clicks the link, ensuring it doesn't interfere with the browsing experience.
+
 'use client'
 
 import { useState, useEffect } from 'react'

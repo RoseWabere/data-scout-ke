@@ -11,7 +11,7 @@ const trustSignals = [
 
 export default function TrustBar() {
   return (
-    <div className="border-y border-border-subtle py-8 bg-surface backdrop-blur-sm">
+    <div className="border-y border-border-subtle py-8 bg-black/20 backdrop-blur-sm">
       <div className="container mx-auto px-6">
         
         {/* Headline */}
