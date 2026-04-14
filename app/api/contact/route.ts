@@ -1,29 +1,61 @@
+// app/api/contact/route.ts
 import { NextResponse } from 'next/server'
-import { Resend } from 'resend'
-
-const resend = new Resend(process.env.RESEND_API_KEY)
+import nodemailer from 'nodemailer'
 
 export async function POST(request: Request) {
-  const { name, email, organization, message } = await request.json()
-
   try {
-    await resend.emails.send({
-      from: 'Data Scout KE <onboarding@resend.dev>', // or your verified domain
-      to: ['rosewabere1@gmail.com'], // you receive here
-      subject: `New contact from ${name}`,
-      html: `<p>Name: ${name}</p><p>Email: ${email}</p><p>Org: ${organization || '-'}</p><p>Message: ${message}</p>`,
+    const { name, email, organization, message } = await request.json()
+
+    // Validate required fields
+    if (!name || !email || !message) {
+      return NextResponse.json(
+        { error: 'Name, email, and message are required' },
+        { status: 400 }
+      )
+    }
+
+    // Configure transporter (use your Gmail credentials)
+    // IMPORTANT: Use App Password, not your regular Gmail password
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: process.env.GMAIL_USER, // your Gmail address
+        pass: process.env.GMAIL_APP_PASSWORD, // Gmail App Password
+      },
     })
 
-    // Optional auto-reply
-    await resend.emails.send({
-      from: 'Data Scout KE <onboarding@resend.dev>',
-      to: [email],
-      subject: 'Thank you for contacting Data Scout KE',
-      html: `<p>Hi ${name}, I'll get back to you within a few hours.</p>`,
-    })
+    // Email content
+    const mailOptions = {
+      from: process.env.GMAIL_USER,
+      to: process.env.GMAIL_USER, // send to yourself
+      replyTo: email,
+      subject: `New Contact from Data Scout KE: ${name}`,
+      text: `
+Name: ${name}
+Email: ${email}
+Organization: ${organization || 'Not provided'}
+
+Message:
+${message}
+      `,
+      html: `
+        <h2>New Contact Form Submission</h2>
+        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p>
+        <p><strong>Organization:</strong> ${organization || 'Not provided'}</p>
+        <p><strong>Message:</strong></p>
+        <p>${message.replace(/\n/g, '<br/>')}</p>
+      `,
+    }
+
+    await transporter.sendMail(mailOptions)
 
     return NextResponse.json({ success: true })
   } catch (error) {
-    return NextResponse.json({ error: 'Failed to send' }, { status: 500 })
+    console.error('Email error:', error)
+    return NextResponse.json(
+      { error: 'Failed to send message. Please try again.' },
+      { status: 500 }
+    )
   }
 }

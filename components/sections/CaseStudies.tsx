@@ -85,7 +85,7 @@ export default function CaseStudies() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className="card-business p-8"
+              className="card-premium p-8"
             >
               <div className="grid lg:grid-cols-3 gap-8">
                 {/* Left Column */}

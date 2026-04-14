@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import Link from 'next/link'
+import HeroVisual from '../HeroVisual'
 
 export default function Hero() {
   return (
@@ -66,6 +67,7 @@ export default function Hero() {
           </motion.div>
         </motion.div>
       </div>
+        <HeroVisual />
     </section>
   )
 }
