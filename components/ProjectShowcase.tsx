@@ -38,7 +38,7 @@ export default function ProjectShowcase() {
 
   return (
     <div
-      className="hidden lg:block absolute right-8 top-1/2 -translate-y-1/2 w-[400px]"
+      className="hidden lg:block absolute right-8 top-1/2 -translate-y-1/2 w-[450px]"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
